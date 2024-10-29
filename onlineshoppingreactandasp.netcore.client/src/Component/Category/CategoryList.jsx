@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import $ from 'jquery';
+import { useNavigate, useLocation, } from 'react-router-dom';
+/*import $ from 'jquery';*/
 import { FaHeart, FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import axios from 'axios'
 
 function CategoryList() {
     const [categoryList, setCategoryList] = useState([]);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        populateCategoryData();
-    }, []);
+        // If products are passed from NavBar, use them; otherwise, fetch all categories
+        if (location.state?.products) {
+            setCategoryList(location.state.products);
+        } else {
+            populateCategoryData();
+        }
+    }, [location.state]);
 
     async function populateCategoryData() {
         try {
@@ -32,7 +38,7 @@ function CategoryList() {
 
 
     return (
-        <div className="category-list  flex flex-wrap justify-between mx-0 px-0">
+        <div className="category-list  flex flex-wrap justify-start mx-0 px-8 gap-2 ">
             {categoryList.map((product, index) => (
                 <div key={index} className="flex  mb-4 pb-4">
                     <div className="max-w-[14rem] bg-white border border-gray-200 rounded-lg shadow-md mt-2 ml-2">

@@ -62,6 +62,41 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             return Ok(List.ToArray());
         }
 
+
+        [HttpGet("searchproduct")] // Accessible as 'api/category/index'
+        public async Task<ActionResult> SearchProduct([FromQuery] string SearchText)
+        {
+            var List = new List<ProductCat>();
+
+            var result = _context.TblProducts
+                       .Join(_context.TblCategories,
+                             p => p.CategoryId,
+                             c => c.Id,
+                             (p, c) => new
+                             {
+                                 ProductName = p.Name,
+                                 CategoryId = p.CategoryId,
+                                 Price = p.Price,
+                                 ImageUrl = p.ImageUrl,
+                                 Quantity = p.Quantity
+                             })
+                       .Where(p => string.IsNullOrEmpty(SearchText) || EF.Functions.Like(p.ProductName, $"%{SearchText}%"))
+                       .ToList();
+
+            foreach (var item in result)
+            {
+                var m = new ProductCat
+                {
+                    Name = item.ProductName,
+                    Price = item.Price,
+                    ImageUrl = "https://localhost:7096" + item.ImageUrl,
+                    Quantity = item.Quantity
+                };
+                List.Add(m);
+            }
+            return Ok(List.ToArray());
+        }
+
         // GET: CategoryController/Details/5
         public ActionResult Details(int id)
         {

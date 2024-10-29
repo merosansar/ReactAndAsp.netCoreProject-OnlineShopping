@@ -12,7 +12,7 @@ const Carousel = ({ slids }) => {
     const thumbsSwiperRef = useRef(null); // Reference for the thumbnail swiper
 
     return (
-        <div className="flex flex-row pb-10 w-full mt-4">
+        <div className="flex flex-row pb-10 w-full mt-4 px-8 ">
             {/* Carousel Section */}
             <div className="w-3/4 ml-2 mr-2">
                 <div className="relative">
