@@ -32,7 +32,7 @@ function CategoryList() {
 
 
     return (
-        <div className="category-list  flex flex-wrap justify-start">
+        <div className="category-list  flex flex-wrap justify-between mx-0 px-0">
             {categoryList.map((product, index) => (
                 <div key={index} className="flex  mb-4 pb-4">
                     <div className="max-w-[14rem] bg-white border border-gray-200 rounded-lg shadow-md mt-2 ml-2">

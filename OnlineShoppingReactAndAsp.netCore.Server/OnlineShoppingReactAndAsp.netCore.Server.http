@@ -11,13 +11,24 @@
 ### POST request to submit registration dynamically
 ### POST request to submit registration dynamically
 ### Register User
-POST  {{OnlineShoppingReactAndAsp.netCore.Server_HostAddress}}/api/user/login
+POST  {{OnlineShoppingReactAndAsp.netCore.Server_HostAddress}}/api/productdetails/create
 Content-Type: application/json
 
 {
-    
-    "email": "john@example.com",
-    "passwordHash": "1234dsf"
+     "id": 0,
+    "productId": 123,
+    "description": "Sample description",
+    "specifications": "Sample specifications",
+    "brandId": 456,
+    "productModel": "Model123",
+    "warranty": "1 year",
+    "material": "Steel",
+    "colorId": 789,
+    "dimensions": "10x20x30",
+    "length": 10,
+    "width": 20,
+    "height": 30,
+    "weight": 2.5
    
 }
 

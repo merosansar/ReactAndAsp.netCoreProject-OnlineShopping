@@ -21,12 +21,8 @@ import Category from './Component/Category/Category';
 import CategoryList from './Component/Category/CategoryList';
 import CreateProduct from './Component/Product/CreateProduct';
 import AddCart from './Component/Product/AddCart';
-
-
-
-
-
-
+import CreateProductDetails from './Component/ProductDetails/CreateProductDetails';
+/*import ToggleButton from './Component/ToggleButton/ToggleButton';*/
 
 
 
@@ -62,6 +58,8 @@ const HomePage = () => {
     );
 }
 
+
+
 const App = () => {
     return (
         <Router>
@@ -69,7 +67,8 @@ const App = () => {
                 <NavBar /> {/* Navbar will always be displayed */}
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-
+                    <Route path="/ProductDetails" element={<CreateProductDetails />} />
+                    <Route path="/createproduct" element={<CreateProduct />} />
                     <Route path="/addcart" element={<AddCart />} />
                   {/*  <Route path="/" element={<UserList />} />*/}
                     <Route path="/signup" element={<Register />} /> {/* Correct path for register */}
@@ -77,8 +76,8 @@ const App = () => {
                     <Route path="/EditUser/:id" element={<EditUser />} />
                     <Route path="/DetailUser/:id" element={<DetailUser />} />
                     <Route path="/category" element={<Category />} />
-                    <Route path="/createproduct" element={<CreateProduct />} />
-                    
+                   
+                   {/* <Route path="/togglebutton" element={<ToggleButton />} />*/}
                   
                 </Routes>
                 <Footer /> {/* Footer will always be displayed */}

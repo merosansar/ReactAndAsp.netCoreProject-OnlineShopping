@@ -7,6 +7,7 @@ using OnlineShoppingReactAndAsp.netCore.Server.RepoModel;
 using OnlineShoppingReactAndAsp.netCore.Server.Services.IServices;
 using OnlineShoppingReactAndAsp.netCore.Server.UtilitySservice;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using static OnlineShoppingReactAndAsp.netCore.Server.Controllers.CategoryController;
 
 namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
@@ -40,7 +41,8 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                    Rating 
                 );
 
-                return Ok();
+               
+                return Ok(result.Code);//here i return ProductId in the code from storedprocedure Proc_Product
             }
             catch
             {

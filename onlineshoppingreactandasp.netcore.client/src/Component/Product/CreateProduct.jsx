@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateProduct = () => {
@@ -14,7 +15,7 @@ const CreateProduct = () => {
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
     const [imageFile, setImageFile] = useState(null);
-
+    const navigate = useNavigate();
 
     // Handle file input
     const handleFileChange = (e) => {
@@ -121,6 +122,9 @@ const CreateProduct = () => {
                 },
             });
             console.log(response.data);
+            const productId = response.data;
+            navigate('/ProductDetails',{ state:{productId:productId } });
+
         } catch (error) {
             console.error('Error uploading image:', error);
         }
@@ -248,7 +252,7 @@ const CreateProduct = () => {
                     />
                 </div>
 
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mt-3">
+                <button type="submit" className="text-white mt-5 mb-3 mx-20 w-1/2 bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-20 py-2.5 text-center">
                     Submit
                 </button>
             </form>

@@ -15,7 +15,9 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.ServiceRepo
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ITokenComparisonService, TokenComparisonService>();
             services.AddScoped<ICookieService, CookieService>();
+            services.AddScoped<IProductDetailsService, ProductDetailsService>();
 
+            
             return services;
         }
     }

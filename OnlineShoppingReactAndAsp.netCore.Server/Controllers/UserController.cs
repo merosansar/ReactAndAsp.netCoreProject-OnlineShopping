@@ -18,8 +18,8 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         public readonly EshopContext _context = context;
         private readonly IUserAuthenticationService Authentication = authentication;
         private readonly EncryptionDecryptionFun EncryptDecrypt = encryptdecrypt;
-
         private readonly IConfiguration _configuration = configuration;
+
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] UserRegisterDto model)
