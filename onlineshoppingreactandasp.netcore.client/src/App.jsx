@@ -53,7 +53,7 @@ const HomePage = () => {
     return (
         <div>
             <Carousel slids={slids} /> {/* Carousel component */}
-            <CategoryList /> {/* Product component */}
+            <CategoryList  /> {/* Product component */}
         </div>
     );
 }
@@ -61,12 +61,14 @@ const HomePage = () => {
 
 
 const App = () => {
+   
+
     return (
         <Router>
             <div>
                 <NavBar /> {/* Navbar will always be displayed */}
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage  />} />
                     <Route path="/ProductDetails" element={<CreateProductDetails />} />
                     <Route path="/createproduct" element={<CreateProduct />} />
                     <Route path="/addcart" element={<AddCart />} />

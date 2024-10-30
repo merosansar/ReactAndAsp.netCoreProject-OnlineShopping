@@ -12,7 +12,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController(EshopContext context, ICategoryService categoryService,ITokenComparisonService tokenComparisionService) :  ControllerBase
+    public class CategoryController(EshopContext context, ICategoryService categoryService, ITokenComparisonService tokenComparisionService) : ControllerBase
     {
         private readonly EshopContext _context = context;
         private readonly ICategoryService _categoryService = categoryService;
@@ -23,43 +23,45 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromForm] string id, [FromForm] string description, [FromForm] IFormFile image)
         {
-           
-               var result = await _categoryService.AddCategoryAsync("u", Convert.ToInt32(id), "", description, image);
+
+            var result = await _categoryService.AddCategoryAsync("u", Convert.ToInt32(id), "", description, image);
             return Ok(result);
 
-           
+
         }
         // POST: CategoryController/Create
         [HttpGet("index")] // Accessible as 'api/category/index'
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
-           // var userName = HttpContext.Session.GetString("UserName");
-
             var List = new List<ProductCat>();
-           
-            var result = from p in _context.TblProducts
-                         join c in _context.TblCategories on p.CategoryId equals c.Id
-                         select new
-                         {
-                             ProductName = p.Name,
-                             CategoryId = p.CategoryId,
-                             Price = p.Price,
-                             ImageUrl =p.ImageUrl ,
-                             Quantity = p.Quantity
-                         };
+
+            var result = (from p in _context.TblProducts
+                          join c in _context.TblCategories on p.CategoryId equals c.Id
+                          select new
+                          {
+                              ProductName = p.Name,
+                              CategoryId = p.CategoryId,
+                              Price = p.Price,
+                              ImageUrl = p.ImageUrl,
+                              Quantity = p.Quantity
+                          })
+                          .Skip((page - 1) * pageSize)  // Skip records based on page
+                          .Take(pageSize)               // Take only pageSize records
+                          .ToList();
+
             foreach (var item in result)
             {
-                var m = new ProductCat();
-                m.Name = item.ProductName;
-                m.Price = item.Price;
-                m.ImageUrl = "https://localhost:7096"+item.ImageUrl; /*/ Images/Product/BlackT - Shirt.jpg*/
-                m.Quantity = item.Quantity;
+                var m = new ProductCat
+                {
+                    Name = item.ProductName,
+                    Price = item.Price,
+                    ImageUrl = "https://localhost:7096" + item.ImageUrl,
+                    Quantity = item.Quantity
+                };
                 List.Add(m);
             }
-            //bool isTokenValid = _tokenComparisionService.CompareJwtTokens(HttpContext, userName);
-            // if (isTokenValid == true) { return Ok(List.ToArray()); }
 
-            return Ok(List.ToArray());
+            return Ok(List);
         }
 
 
@@ -108,7 +110,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         {
             return Ok();
         }
-     
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -168,7 +170,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         public class Category
         {
             public int Id { get; set; }
-           
+
             public string Description { get; set; }
             public IFormFile ImageUrl { get; set; } // Change to IFormFile
         }
@@ -179,7 +181,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             public string Name { get; set; }
             public string ImageUrl { get; set; } // Change to IFormFile
             public decimal Price { get; set; } // Change to IFormFile
-            public int  Quantity { get; set; }
+            public int Quantity { get; set; }
 
         }
     }
