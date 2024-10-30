@@ -22,8 +22,8 @@ const AddCart = () => {
         <div className="flex flex-col  bg-white   px-20 mx-10">
         <div className="flex justify-center p-6">
             {/* Left side: Product Image */}
-            <div className="w-1/4">
-                <div className="flex flex-col items-center space-y-4">
+                <div className="w-1/4 border border-gray-200 shadow hover:shadow-lg transition-shadow duration-300  p-2 ">
+                    <div className="flex flex-col items-center space-y-4 ">
                     {/* Main Product Image */}
                     <img
                             src={product.imageUrl} 
@@ -163,7 +163,7 @@ const AddCart = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="mt-4 flex space-x-4">
+                <div className="mt-4 flex space-x-4 mb-10">
                         <button className="bg-sky-500 text-white px-10 py-1 rounded hover:bg-sky-600">Buy Now</button>
                         <button className="bg-orange-500 text-white px-10 py-1 rounded hover:bg-orange-600">Add to Cart</button>
                           

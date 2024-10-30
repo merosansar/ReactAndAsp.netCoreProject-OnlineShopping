@@ -22,6 +22,8 @@ import CategoryList from './Component/Category/CategoryList';
 import CreateProduct from './Component/Product/CreateProduct';
 import AddCart from './Component/Product/AddCart';
 import CreateProductDetails from './Component/ProductDetails/CreateProductDetails';
+import CartItem from './Component/Cart/CartItem';
+
 /*import ToggleButton from './Component/ToggleButton/ToggleButton';*/
 
 
@@ -68,7 +70,10 @@ const App = () => {
             <div>
                 <NavBar /> {/* Navbar will always be displayed */}
                 <Routes>
-                    <Route path="/" element={<HomePage  />} />
+                     <Route path="/" element={<HomePage  />} />
+                     <Route path="/Cartitemlist" element={<CartItem  />} />
+
+                    
                     <Route path="/ProductDetails" element={<CreateProductDetails />} />
                     <Route path="/createproduct" element={<CreateProduct />} />
                     <Route path="/addcart" element={<AddCart />} />

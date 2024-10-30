@@ -43,7 +43,8 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                               CategoryId = p.CategoryId,
                               Price = p.Price,
                               ImageUrl = p.ImageUrl,
-                              Quantity = p.Quantity
+                              Quantity = p.Quantity,
+                              Id = p.Id,
                           })
                           .Skip((page - 1) * pageSize)  // Skip records based on page
                           .Take(pageSize)               // Take only pageSize records
@@ -56,7 +57,8 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                     Name = item.ProductName,
                     Price = item.Price,
                     ImageUrl = "https://localhost:7096" + item.ImageUrl,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    Id = item.Id
                 };
                 List.Add(m);
             }
