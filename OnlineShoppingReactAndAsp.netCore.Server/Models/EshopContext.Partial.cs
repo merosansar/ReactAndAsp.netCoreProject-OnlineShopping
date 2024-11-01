@@ -15,8 +15,9 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Models
 
         public DbSet<Product> Product { get; set; }
         public DbSet<AccessToken> AccessToken { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
-        
+        public DbSet<CartCount> cartCounts { get; set; }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
@@ -47,6 +48,16 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Models
             });
 
             modelBuilder.Entity<AccessToken>(entity =>
+            {
+                entity.HasNoKey();
+                // Additional configuration for your keyless entity
+            });
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasNoKey();
+                // Additional configuration for your keyless entity
+            });
+            modelBuilder.Entity<CartCount>(entity =>
             {
                 entity.HasNoKey();
                 // Additional configuration for your keyless entity

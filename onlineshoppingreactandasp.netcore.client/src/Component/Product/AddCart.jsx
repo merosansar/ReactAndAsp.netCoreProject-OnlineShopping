@@ -1,12 +1,13 @@
 ﻿import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
-
+import axios from 'axios';
 
 
 
 const AddCart = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { product } = location.state;  // Extract the product data passed via state
     const [quantity, setQuantity] = useState(1);
 
@@ -18,6 +19,23 @@ const AddCart = () => {
         }
        
     };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('/api/cart/create', product);
+            console.log(response.data);
+            // Navigate or perform other actions with the response if needed
+        } catch (error)
+        {
+            if (error.response.status == 400)
+            {
+                navigate('/login');
+            } 
+          
+        }
+    };
+
     return (
         <div className="flex flex-col  bg-white   px-20 mx-10">
         <div className="flex justify-center p-6">
@@ -165,7 +183,7 @@ const AddCart = () => {
                 {/* Action Buttons */}
                 <div className="mt-4 flex space-x-4 mb-10">
                         <button className="bg-sky-500 text-white px-10 py-1 rounded hover:bg-sky-600">Buy Now</button>
-                        <button className="bg-orange-500 text-white px-10 py-1 rounded hover:bg-orange-600">Add to Cart</button>
+                        <button className="bg-orange-500 text-white px-10 py-1 rounded hover:bg-orange-600" onClick={handleSubmit}>Add to Cart</button>
                           
                     </div>
                 </div>

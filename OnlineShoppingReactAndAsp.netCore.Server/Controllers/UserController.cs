@@ -112,26 +112,27 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel u)
         {
-            var m = Authentication.ReturnDecryptPassword("s", u.Email ?? "", u.PasswordHash ?? "",u.JwtToken).ToList().FirstOrDefault();
-          
+            var m = Authentication.ReturnDecryptPassword("s", u.Email ?? "", u.PasswordHash ?? "",u.JwtToken).ToList().FirstOrDefault();        
            
-
             var i = Authentication.LoginResponse("a", u.Email ?? "", u.PasswordHash ?? "",u.JwtToken).ToList().FirstOrDefault();
             if (i != null)
             {
                 if (i.Code == "000")
                 {
 
+                    if (m != null)
+                    {
+                        HttpContext.Session.SetInt32("UserId", m.Id);
+                        HttpContext.Session.SetString("FullName", m.FullName ?? "");
+                    }
+
 
                     // Create JWT token
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                   
+                    var tokenHandler = new JwtSecurityTokenHandler();                  
 
                     // Retrieve the secret key from appsettings.json
                     var secretKey = _configuration["JwtSettings:SecretKey"];
                     var key = Encoding.ASCII.GetBytes(secretKey);  // Convert secret key to bytes
-
-
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, u.Email) }),
@@ -149,7 +150,6 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                         SameSite = SameSiteMode.Strict, // Prevent CSRF attacks
                         Path = "/" // Path where the cookie is accessible
                     };
-
                     // Add the token to cookies
                     HttpContext.Response.Cookies.Append("jwtToken", tokenString, cookieOptions);
                     var  updateToken = Authentication.LoginResponse("u", u.Email ?? "", u.PasswordHash ?? "", tokenString).ToList().FirstOrDefault();
@@ -160,15 +160,11 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                         {
                             HttpContext.Session.SetString("UserName", u.Email ?? "");
                             return Ok(new { message = "Login successful" });
-                        }
-                            
+                        }                           
 
                     }
                     // Return a success response
-                    return BadRequest(new { message = "Login not  successful" });
-
-
-                    
+                    return BadRequest(new { message = "Login not  successful" });                    
                 }
             }
             return BadRequest();

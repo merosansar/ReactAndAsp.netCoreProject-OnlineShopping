@@ -33,7 +33,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         [HttpGet("index")] // Accessible as 'api/category/index'
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
-            var List = new List<ProductCat>();
+            var List = new List<ProductCart>();
 
             var result = (from p in _context.TblProducts
                           join c in _context.TblCategories on p.CategoryId equals c.Id
@@ -52,7 +52,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
 
             foreach (var item in result)
             {
-                var m = new ProductCat
+                var m = new ProductCart
                 {
                     Name = item.ProductName,
                     Price = item.Price,
@@ -70,7 +70,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
         [HttpGet("searchproduct")] // Accessible as 'api/category/index'
         public async Task<ActionResult> SearchProduct([FromQuery] string SearchText)
         {
-            var List = new List<ProductCat>();
+            var List = new List<ProductCart>();
 
             var result = _context.TblProducts
                        .Join(_context.TblCategories,
@@ -89,7 +89,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
 
             foreach (var item in result)
             {
-                var m = new ProductCat
+                var m = new ProductCart
                 {
                     Name = item.ProductName,
                     Price = item.Price,
@@ -169,22 +169,22 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             }
         }
 
-        public class Category
-        {
-            public int Id { get; set; }
+        //public class Category
+        //{
+        //    public int Id { get; set; }
 
-            public string Description { get; set; }
-            public IFormFile ImageUrl { get; set; } // Change to IFormFile
-        }
-        public class ProductCat
-        {
-            public int Id { get; set; }
+        //    public string Description { get; set; }
+        //    public IFormFile ImageUrl { get; set; } // Change to IFormFile
+        //}
+        //public class ProductCat
+        //{
+        //    public int Id { get; set; }
 
-            public string Name { get; set; }
-            public string ImageUrl { get; set; } // Change to IFormFile
-            public decimal Price { get; set; } // Change to IFormFile
-            public int Quantity { get; set; }
+        //    public string Name { get; set; }
+        //    public string ImageUrl { get; set; } // Change to IFormFile
+        //    public decimal Price { get; set; } // Change to IFormFile
+        //    public int Quantity { get; set; }
 
-        }
+        //}
     }
 }

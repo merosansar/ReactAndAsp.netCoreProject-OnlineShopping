@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
+
 
 
 const CartItem = () => {
+    const location = useLocation();
+    const { product } = location.state;  // Extract the product data passed via state
     return (
         <div className="flex items-start flex-row shadow mt-5 p-4 w-full">
             <div className="w-3/4">
@@ -28,8 +32,7 @@ const CartItem = () => {
                                 <button className="border px-3 py-1 text-lg">+</button>
                             </td>
                             <td className="px-4 py-2 text-center">Delete button</td>
-                        </tr>
-                     
+                        </tr>                     
                     </tbody>
                 </table>
             </div>
