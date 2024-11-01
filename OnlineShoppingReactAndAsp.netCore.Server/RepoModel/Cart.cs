@@ -20,5 +20,9 @@
 
         public decimal? Weight { get; set; }
         public bool IsSelected { get; set; }
+        public string? ImageUrl { get; set; }
+
+
+        
     }
 }

@@ -24,42 +24,23 @@ import AddCart from './Component/Product/AddCart';
 import CreateProductDetails from './Component/ProductDetails/CreateProductDetails';
 import CartItem from './Component/Cart/CartItem';
 
-/*import ToggleButton from './Component/ToggleButton/ToggleButton';*/
-
-
-
-//const slids = ["https://media.istockphoto.com/id/2006076692/photo/little-lake.webp?s=1024x1024&w=is&k=20&c=WQO4iYjFzBrVSleDmhRQxHkjDiWZfT6Xdnol4_VU5wc=",
-//    "https://media.istockphoto.com/id/1431021822/photo/happy-hiker-with-raised-arms-on-top-of-the-mountain.jpg?s=1024x1024&w=is&k=20&c=G5ZgCdHmYTL2A126lypnqLr-922SpdURBVolvXRdMDQ=",
-//    "https://media.istockphoto.com/id/2006076692/photo/little-lake.webp?s=1024x1024&w=is&k=20&c=WQO4iYjFzBrVSleDmhRQxHkjDiWZfT6Xdnol4_VU5wc=",
-//    "https://cdn.pixabay.com/photo/2023/06/21/14/17/mountain-8079469_1280.jpg",
-//    "https://media.istockphoto.com/id/2006076692/photo/little-lake.webp?s=1024x1024&w=is&k=20&c=WQO4iYjFzBrVSleDmhRQxHkjDiWZfT6Xdnol4_VU5wc=",
-//    "https://media.istockphoto.com/id/2006076692/photo/little-lake.webp?s=1024x1024&w=is&k=20&c=WQO4iYjFzBrVSleDmhRQxHkjDiWZfT6Xdnol4_VU5wc=",
-//    "https://media.istockphoto.com/id/2006076692/photo/little-lake.webp?s=1024x1024&w=is&k=20&c=WQO4iYjFzBrVSleDmhRQxHkjDiWZfT6Xdnol4_VU5wc=",
-//    // Add more image URLs as needed
-//];
-
 
 
 const slids = [
-    "/Hill.jpg",  // Replace with your actual image names
+    "/Hill.jpg", 
     "/shop.jpg",
     "/bags.jpg",
    
-    // Add more image URLs as needed
+  
 ];
-
-
-
-// HomePage component that includes both the carousel and products
 const HomePage = () => {
     return (
         <div>
             <Carousel slids={slids} /> {/* Carousel component */}
-            <CategoryList  /> {/* Product component */}
+            <CategoryList /> {/* Product component */}
         </div>
     );
 }
-
 
 
 const App = () => {
@@ -84,8 +65,6 @@ const App = () => {
                     <Route path="/DetailUser/:id" element={<DetailUser />} />
                     <Route path="/category" element={<Category />} />
                    
-                   {/* <Route path="/togglebutton" element={<ToggleButton />} />*/}
-                  
                 </Routes>
                 <Footer /> {/* Footer will always be displayed */}
             </div>

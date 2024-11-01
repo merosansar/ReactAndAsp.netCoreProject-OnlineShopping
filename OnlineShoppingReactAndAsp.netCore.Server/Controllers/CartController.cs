@@ -32,13 +32,23 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             }
             else
             {
+                string baseUrl = "https://localhost:7096";
                 i.ProductId = m.Id;
                 i.Quantity = m.Quantity;
                 var cartItemList = _CartService.GetCart("s", i.Id, UserId ?? 0, i.CartItemId ?? 0, m.Id, m.Quantity, m.Price, i.IsSelected);
                 var count = _CartService.GetCartTotalCount("c", i.Id, UserId ?? 0, i.CartItemId ?? 0, m.Id, m.Quantity, m.Price, i.IsSelected).ToList().FirstOrDefault();
                 if(count!=null) { HttpContext.Session.SetString("TotalCartCount", count.ToString()); }
                 else HttpContext.Session.SetString("TotalCartCount", "");
-                return Ok(cartItemList.ToArray());
+                // Modify ImageUrl in each item using LINQ
+                cartItemList = cartItemList.Select(item =>
+                {
+                    if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        item.ImageUrl = baseUrl + item.ImageUrl;
+                    }
+                    return item;
+                }).ToList();
+                return Ok(cartItemList);
             }
         }
     }

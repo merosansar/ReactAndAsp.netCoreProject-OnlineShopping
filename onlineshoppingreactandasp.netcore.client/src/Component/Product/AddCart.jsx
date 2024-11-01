@@ -24,7 +24,8 @@ const AddCart = () => {
 
         try {
             const response = await axios.post('/api/cart/create', product);
-            console.log(response.data);
+            var result = response.data;
+            navigate('/Cartitemlist', { state: { CartItemList: result } });
             // Navigate or perform other actions with the response if needed
         } catch (error)
         {

@@ -22,8 +22,8 @@ function NavBar() {
         <header>
             <nav className="bg-sky-600 py-2 m-0 flex flex-row justify-end">
                 <div className="container  flex justify-between items-center flex-row">
-                    <div className="flex  text-2xl font-bold flex-row ">
-                        <a href="#" className="text-white  mx-2">E-Shop</a>
+                    <div className="flex  items-center text-2xl font-bold flex-row ">
+                        <a href="/" className="text-white  mx-2">E-Shop</a>
                         <div className="flex  items-center border border-white-300 rounded-lg overflow-hidden flex-row mx-4">
                             {/*  <!-- Search Icon -->*/}
                             <input
@@ -39,6 +39,20 @@ function NavBar() {
                             </span>
                             {/*  <!-- Search Input -->*/}
                         </div>
+
+                        {/* Cart Icon with Item Count */}
+                        <a href="/Cartitemlist" className="pl-4 cursor-pointer relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm12 0c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm-3-7H8.6l-1.6-7H5" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 6h2.4a2.4 2.4 0 002.4-2.4 2.4 2.4 0 00-2.4-2.4H7.6a2.4 2.4 0 00-2.4 2.4A2.4 2.4 0 007.6 6H10" />
+                            </svg>
+                            {/* Badge for cart item count */}
+                           
+                                <span className="absolute bottom-4 right-0 bg-green-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                                    1
+                                </span>
+                           
+                        </a>
                     </div>
                     <div className="hidden md:flex space-x-4  ">
                         <a href="/login" className="text-white hover:bg-sky-900 px-3 py-2 rounded-md text-sm font-medium"> Login </a> <a className="text-white hover:bg-sky-900 px-3 py-2 rounded-md text-sm font-medium"> |</a>
