@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
-
 
 const CartItem = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { CartItemList } = location.state || { CartItemList: [] };
 
-
-
-   
     return (
         <div className="flex items-start flex-row shadow mt-5 p-4 w-full">
             <div className="w-3/4">  {/*left side table */}
                 <table className="table-fixed w-full border border-collapse">
                     <thead>
                         <tr className="border-b">
-                            <th className="text-left px-4 py-2 font-semibold">Select</th>
+                            <th className="text-left px-4 py-2 font-semibold"> <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" /> Select All</th>
                             <th className="text-left px-8 py-2 font-semibold">Image</th>
                             <th className="text-left px-4 py-2 font-semibold">Product</th>
                             <th className="text-left px-4 py-2 font-semibold">Price</th>
@@ -35,7 +30,7 @@ const CartItem = () => {
                                     </td>
                                     <td className="px-4 py-2">
                                         {/* Placeholder for the image; replace with actual item image URL if available */}
-                                        <img src={item.imageUrl} className="w-16 h-16 object-cover cursor-pointer rounded-full" alt="Product" />
+                                        <img src={item.imageUrl} className="w-16 h-16 object-cover cursor-pointer rounded-full border border-green-500 hover:border-blue-500" alt="Product" />
                                     </td>
                                     <td className="px-4 py-2">{item.productName}</td>
                                     <td className="px-4 py-2">${item.price.toFixed(2)}</td>
@@ -73,5 +68,4 @@ const CartItem = () => {
         </div>
     );
 };
-
 export default CartItem;

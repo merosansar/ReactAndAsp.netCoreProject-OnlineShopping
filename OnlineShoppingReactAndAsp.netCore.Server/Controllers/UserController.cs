@@ -144,7 +144,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                     // Define cookie options
                     var cookieOptions = new CookieOptions
                     {
-                        HttpOnly = true, // Ensure it's not accessible via JavaScript
+                        HttpOnly = false, // Ensure it's not accessible via JavaScript
                         Secure = true,   // Ensure it's sent over HTTPS only
                         Expires = DateTime.UtcNow.AddHours(1), // Set cookie expiration to match the token's
                         SameSite = SameSiteMode.Strict, // Prevent CSRF attacks
@@ -159,7 +159,7 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
 
                         {
                             HttpContext.Session.SetString("UserName", u.Email ?? "");
-                            return Ok(new { message = "Login successful" });
+                            return Ok(new { message = "SUCCESS" });
                         }                           
 
                     }
@@ -169,6 +169,8 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             }
             return BadRequest();
         }
+
+
         public class UserRegisterDto
         {
             public int Id { get; set; }

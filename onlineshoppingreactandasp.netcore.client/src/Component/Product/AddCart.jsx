@@ -22,8 +22,24 @@ const AddCart = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        
+
         try {
-            const response = await axios.post('/api/cart/create', product);
+
+
+            const data = {
+                id: product.id,
+                name: product.name,
+                imageUrl: product.imageUrl,
+                price: product.price,
+                quantity: quantity
+               
+
+            };
+
+
+
+            const response = await axios.post('/api/cart/create', data);
             var result = response.data;
             navigate('/Cartitemlist', { state: { CartItemList: result } });
             // Navigate or perform other actions with the response if needed

@@ -1,6 +1,6 @@
 @OnlineShoppingReactAndAsp.netCore.Server_HostAddress = http://localhost:5211
 
-# GET {{OnlineShoppingReactAndAsp.netCore.Server_HostAddress}}/user/
+# GET {{OnlineShoppingReactAndAsp.netCore.Server_HostAddress}}/cart/cartcount
 # Accept: application/json
 
 # GET {{OnlineShoppingReactAndAsp.netCore.Server_HostAddress}}/api/dropdown/getdropdownlist

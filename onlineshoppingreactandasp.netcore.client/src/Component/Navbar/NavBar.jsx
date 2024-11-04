@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ToggleButton from '../ToggleButton/ToggleButton';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../AuthContext";
+
+
 function NavBar() {
 
     const [searchText, setSearchText] = useState('');
+            
+    const [cartCount, setCartCount] = useState('');
+    const { isLoggedIn } = useAuth(); // Access login state from context
     const navigate = useNavigate();
     const handleSearch = async () => {
         try {
@@ -17,6 +23,23 @@ function NavBar() {
             console.error("Error fetching search results:", error);
         }
     };
+
+    const getCartCount = async () => {
+        try {
+            const response = await axios.get(`api/cart/cartcount`);
+            const data = response.data;
+            setCartCount(data);
+        } catch (error) {
+            setCartCount('');
+        }
+    };
+
+    // Call getCartCount when user logs in or when the component first mounts
+    useEffect(() => {
+        if (isLoggedIn) {
+            getCartCount();
+        }
+    }, [isLoggedIn]); // Run useEffect when isLoggedIn changes
 
     return (
         <header>
@@ -48,9 +71,11 @@ function NavBar() {
                             </svg>
                             {/* Badge for cart item count */}
                            
+                            {cartCount > 0 && (
                                 <span className="absolute bottom-4 right-0 bg-green-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                                    1
+                                    {cartCount}
                                 </span>
+                            )}
                            
                         </a>
                     </div>
@@ -79,5 +104,5 @@ function NavBar() {
             </nav>
         </header>
     );
-}
+};
 export default NavBar;

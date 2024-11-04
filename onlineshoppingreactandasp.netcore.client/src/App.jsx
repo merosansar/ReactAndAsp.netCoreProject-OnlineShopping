@@ -26,6 +26,7 @@ import CartItem from './Component/Cart/CartItem';
 
 
 
+
 const slids = [
     "/Hill.jpg", 
     "/shop.jpg",

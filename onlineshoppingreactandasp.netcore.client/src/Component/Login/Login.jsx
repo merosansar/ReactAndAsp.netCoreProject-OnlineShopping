@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "../../AuthContext";
+import Cookies from 'js-cookie';
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate(); // Initialize useNavigate
-
+    const { login } = useAuth(); // Import the login function from context
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,7 +38,19 @@ const Login = () => {
 
             const data = await response.json();
             console.log('Response data:', data);
-            navigate('/');
+            // Assuming the JWT is part of the response data
+            if (data.message=="SUCCESS") {
+                // Read JWT token from the cookie if set by the server
+                const jwtToken = Cookies.get('jwtToken');              
+
+                if (jwtToken) {
+                 
+                    login(); // Update your global auth state
+                    navigate('/'); // Redirect to the home page after login
+                } else {
+                    console.error('JWT token not found in cookie');
+                }
+            }
             /*  navigate('./Component/Login/Login');*/
         } catch (error) {
             console.error('Error:', error);

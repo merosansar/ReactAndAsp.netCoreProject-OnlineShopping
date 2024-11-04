@@ -51,5 +51,24 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
                 return Ok(cartItemList);
             }
         }
+
+        [HttpGet("cartcount")]
+        public async Task<IActionResult> GetCartCount()
+        {
+            int? UserId = HttpContext.Session.GetInt32("UserId");
+
+            var i = new Cart();
+            var m = new ProductCart();
+            int? totalCartItem = 0;
+
+            if (!UserId.HasValue)
+            {
+                // Handle case where ID is not in session
+                return BadRequest();
+            }
+            var count = _CartService.GetCartTotalCount("c", i.Id, UserId ?? 0, i.CartItemId ?? 0, m.Id, m.Quantity, m.Price, i.IsSelected).ToList().FirstOrDefault();
+            if (count != null) { totalCartItem = count.TotalCartItem; }
+            return Ok(totalCartItem);
+        }
     }
 }
