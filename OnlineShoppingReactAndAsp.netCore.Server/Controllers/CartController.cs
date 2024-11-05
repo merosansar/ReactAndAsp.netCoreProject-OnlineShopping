@@ -52,7 +52,21 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             }
         }
 
-        [HttpGet("cartcount")]
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] Cart i)
+        {
+            var m = new ProductCart();
+            //var i = new Cart();
+            int? UserId = HttpContext.Session.GetInt32("UserId"); // Retrieve the integer ID from the session
+            string? code = "";
+
+            var result = _CartService.ChangeCart("d",i.Id, UserId ?? 0, i.CartItemId ?? 0, m.Id, m.Quantity, m.Price, i.IsSelected).FirstOrDefault();
+            if (result!= null) { code = result.Code; }
+           return Ok(code);
+        }
+
+
+            [HttpGet("cartcount")]
         public async Task<IActionResult> GetCartCount()
         {
             int? UserId = HttpContext.Session.GetInt32("UserId");

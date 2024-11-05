@@ -23,6 +23,9 @@ import CreateProduct from './Component/Product/CreateProduct';
 import AddCart from './Component/Product/AddCart';
 import CreateProductDetails from './Component/ProductDetails/CreateProductDetails';
 import CartItem from './Component/Cart/CartItem';
+import ShippingAddress from './Component/ShippingAddress/ShippingAddress';
+
+import PaymentMethods from './Component/Payment/PaymentMethods';
 
 
 
@@ -52,7 +55,9 @@ const App = () => {
             <div>
                 <NavBar /> {/* Navbar will always be displayed */}
                 <Routes>
-                     <Route path="/" element={<HomePage  />} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/ShippingAddress" element={<ShippingAddress />} />
+                    <Route path="/PaymentMethods" element={<PaymentMethods />} />
                      <Route path="/Cartitemlist" element={<CartItem  />} />
 
                     
