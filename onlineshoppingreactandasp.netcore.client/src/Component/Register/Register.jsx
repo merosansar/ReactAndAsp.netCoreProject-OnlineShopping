@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 
 import DatePicker from "react-datepicker";
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "react-datepicker/dist/react-datepicker.css"; // Import the styles
 
 import './Register.css';
@@ -51,30 +53,57 @@ const Register = () => {
 
             const data = await response.json();
             console.log('Response data:', data);
-            navigate('/login');
+            toast.success('User Registration successful!', {
+                position: 'top-right',
+                autoClose: 2000,
+                className: "bg-green-900 text-white font-semibold",
+                transition: Zoom,
+                onClose: () => {
+                    // Navigate after the toast closes
+                    
+                    navigate('/login');
+                }
+            });
+           
           /*  navigate('./Component/Login/Login');*/
         } catch (error) {
-            console.error('Error:', error);
+            toast.error('User Registration failed!', {
+                position: 'top-right',
+                autoClose: 2000,
+                className: "bg-green-900 text-white font-semibold",
+                transition: Zoom,
+                onClose: () => {
+                   
+
+                   
+                }
+            });
         }
     };
 
+   
+
+    /* Fetch dropdown list*/
     useEffect(() => {
         const GetGender = async () => {
             try {
-                const response = await axios.get("/api/dropdown/getdropdownlist", {
-                    params: { Params: 'Genderdata' } // Use params to send the 'Genderdata' parameter
+                const response = await axios.get('/api/dropdown/getdropdownlist', {
+                  
+                     params: {
+                         param1: 'Genderdata',  // First parameter
+                        param2: '', // Second parameter
+                        param3: 'Gender'
+
+                    }
                 });
-                console.log("Fetched gender data:", response.data);
-                setGenderList(response.data); // Assuming this is an array
+                setGenderList(response.data);
             } catch (error) {
-                console.error("Error fetching gender data:", error);
+                console.error('Error fetching list data:', error);
             }
         };
 
-        GetGender(); // Call the function to load gender data
-    }, []); // Empty dependency array ensures it runs once when the component mounts
-
-  
+        GetGender();
+    }, []);
   
     return (
 
@@ -201,6 +230,7 @@ const Register = () => {
                 </div>
                 </div>
             </form>
+            <ToastContainer />
         </div>
 
       

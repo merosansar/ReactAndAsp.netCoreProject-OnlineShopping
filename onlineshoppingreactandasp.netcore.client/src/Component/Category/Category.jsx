@@ -41,7 +41,13 @@ const Category = () => {
         const getList = async () => {
             try {
                 const response = await axios.get('/api/dropdown/getdropdownlist', {
-                    params: { Params: 'CatData' }
+                  
+                         params: {
+                        param1: 'CatData',  // First parameter
+                        param2: '', // Second parameter
+                        param3: 'Category'
+
+                    }
                 });
                 setList(response.data);
             } catch (error) {

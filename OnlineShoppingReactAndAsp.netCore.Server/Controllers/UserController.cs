@@ -170,7 +170,23 @@ namespace OnlineShoppingReactAndAsp.netCore.Server.Controllers
             return BadRequest();
         }
 
+        //[HttpPost("logout")]
+        //public IActionResult Logout()
+        //{
+        //    // Clear the JWT token from the cookie
+        //    Response.Cookies.Delete("jwtToken");
 
+        //    // Clear the session data
+        //    HttpContext.Session.Remove("UserId");
+        //    HttpContext.Session.Remove("FullName");
+        //    HttpContext.Session.Remove("UserName");
+
+        //    // Optionally, you can also set the session to expire
+        //    HttpContext.Session.Clear();
+
+        //    // Return a response indicating successful logout
+        //    return Ok(new { message = "Logged out successfully" });
+        //}
         public class UserRegisterDto
         {
             public int Id { get; set; }

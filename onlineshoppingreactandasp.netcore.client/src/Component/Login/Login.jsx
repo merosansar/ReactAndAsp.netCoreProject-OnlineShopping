@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../AuthContext";
 import Cookies from 'js-cookie';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 
 const Login = () => {
@@ -31,9 +33,15 @@ const Login = () => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Server error:', errorText);
-                return;
+                toast.error('Login failed. Please check your credentials.', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    className: "bg-green-900 text-white font-semibold",
+                    transition: Zoom,
+                    onClose: () => {
+
+                    }
+                });
             }
 
             const data = await response.json();
@@ -44,16 +52,44 @@ const Login = () => {
                 const jwtToken = Cookies.get('jwtToken');              
 
                 if (jwtToken) {
-                 
-                    login(); // Update your global auth state
-                    navigate('/'); // Redirect to the home page after login
-                } else {
-                    console.error('JWT token not found in cookie');
+                   
+                    toast.success('Login successful!', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        className: "bg-green-900 text-white font-semibold",
+                        transition: Zoom,
+                        onClose: () => {
+                            // Navigate after the toast closes
+                            login(); // Update your global auth state
+                            navigate('/');
+                        }
+                    });
+                }
+                else {
+
+                    toast.error('Login failed. Please check your credentials.', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        className: "bg-green-900 text-white font-semibold",
+                        transition: Zoom,
+                        onClose: () => {
+                           
+                        }
+                    });
+                   
                 }
             }
             /*  navigate('./Component/Login/Login');*/
         } catch (error) {
-            console.error('Error:', error);
+            toast.error('Login failed. Please check your credentials.', {
+                position: 'top-right',
+                autoClose: 2000,
+                className: "bg-green-900 text-white font-semibold",
+                transition: Zoom,
+                onClose: () => {
+
+                }
+            });
         }
     };
 
@@ -136,6 +172,8 @@ const Login = () => {
 
                     </div>
                 </form>
+
+                <ToastContainer />
             </div>
         </div>
 
