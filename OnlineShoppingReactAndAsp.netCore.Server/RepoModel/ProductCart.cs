@@ -7,5 +7,7 @@
         public string ImageUrl { get; set; } // Change to IFormFile
         public decimal Price { get; set; } // Change to IFormFile
         public int Quantity { get; set; }
+      
+
     }
 }

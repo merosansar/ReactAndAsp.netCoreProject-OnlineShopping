@@ -82,6 +82,29 @@ const CartItem = () => {
       
     };
 
+
+    // Function to handle checkout button click
+    const handleCheckout = async () => {
+        const selectedItems = cartItems.filter(item => item.IsSelected);
+        if (selectedItems.length > 0) {
+            try {
+                navigate('/ShippingAddress', { state: { selectedItems: selectedItems } });
+                
+                //const response = await axios.post('/api/order/checkout', selectedItems);
+                //if (response.status === 200) {
+                //    // Handle successful checkout, such as navigating to a confirmation page
+                //    console.log('Checkout successful:', response.data);
+                //    navigate('/confirmation', { state: { checkoutData: response.data } });
+                //}
+            } catch (error) {
+                console.error('Error during checkout:', error);
+            }
+        } else {
+            alert('No items selected for checkout');
+        }
+    };
+
+
     return (
         <div className="flex items-start flex-row shadow mt-5 p-4 w-full">
             <div className="w-3/4">  {/*left side table */}
@@ -152,7 +175,7 @@ const CartItem = () => {
                     <div>Total Price:</div>  <div>${totalPrice.toFixed(2)}</div>
                 </div>
                 <div className="mt-10 pt-10 mb-20 pb-40 ">
-                    <button className="text-white w-full h-1/4 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 font-medium rounded-lg px-2 py-1 text-center">
+                    <button onClick={handleCheckout}  className="text-white w-full h-1/4 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 font-medium rounded-lg px-2 py-1 text-center">
                         Check Out
                     </button>
                 </div>
