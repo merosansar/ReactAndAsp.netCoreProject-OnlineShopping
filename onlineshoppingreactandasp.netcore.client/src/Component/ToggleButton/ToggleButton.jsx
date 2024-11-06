@@ -12,45 +12,45 @@ function ToggleButton() {
         setShowOptions(!showOptions);
     };
 
-    // Logout function to call the API endpoint
-    //const logout = () => {
-    //    axios.post('/api/user/logout')
-    //        .then((response) => {
-    //            if (response.status === 200) {
-    //                // Redirect the user to the login page or home page after logout
+     //Logout function to call the API endpoint
+    const logout = () => {
+        axios.post('/api/user/logout')
+            .then((response) => {
+                if (response.status === 200) {
+                    // Redirect the user to the login page or home page after logout
 
-    //                toast.success('Logout Success', {
-    //                    position: 'top-right',
-    //                    autoClose: 2000,
-    //                    className: "bg-green-900 text-white font-semibold",
-    //                    transition: Zoom,
-    //                    onClose: () => {
+                    toast.success('Logout Success', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        className: "bg-green-900 text-white font-semibold",
+                        transition: Zoom,
+                        onClose: () => {
 
 
-    //                        navigate('/');
-    //                    }
-    //                });
+                            navigate('/');
+                        }
+                    });
 
                     
-    //            }
-    //        })
-    //        .catch((error) => {
+                }
+            })
+            .catch((error) => {
 
-    //            toast.success('Error in  logging out:', {
-    //                position: 'top-right',
-    //                autoClose: 2000,
-    //                className: "bg-green-900 text-white font-semibold",
-    //                transition: Zoom,
-    //                onClose: () => {
+                toast.success('Error in  logging out:', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    className: "bg-green-900 text-white font-semibold",
+                    transition: Zoom,
+                    onClose: () => {
 
 
                         
-    //                }
-    //            });
+                    }
+                });
 
                
-    //        });
-    //};
+            });
+    };
 
     return (
         <div className="flex items-center justify-center  bg-sky-600 mr-10">
@@ -62,9 +62,9 @@ function ToggleButton() {
                     <div className="cursor-pointer p-2 hover:bg-gray-200 rounded"><a href="/createproduct"> Add Product </a></div>
                     <div className="cursor-pointer p-2 hover:bg-gray-200 rounded"><a href="/category">Add Category</a></div>
                     <div className="cursor-pointer p-2 hover:bg-gray-200 rounded"> <a href="/ProductDetails">Add Product Details</a></div>
-                    <div className="cursor-pointer p-2 hover:bg-gray-200 rounded" > <a href="#" >Sign Out</a></div>
-                   {/* <div className="cursor-pointer p-2 hover:bg-gray-200 rounded" onClick={logout}> <a href="#" onClick={(e) => e.preventDefault()}>Sign Out</a></div>*/}
-                 {/*   <ToastContainer />*/}
+                   
+                    <div className="cursor-pointer p-2 hover:bg-gray-200 rounded" onClick={logout}> <a href="#" onClick={(e) => e.preventDefault()}>Sign Out</a></div>
+                    <ToastContainer />
                 </div>
             )}
           
