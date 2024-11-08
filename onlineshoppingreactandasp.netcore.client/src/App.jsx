@@ -26,6 +26,7 @@ import CartItem from './Component/Cart/CartItem';
 import ShippingAddress from './Component/ShippingAddress/ShippingAddress';
 
 import PaymentMethods from './Component/Payment/PaymentMethods';
+import ProtectedRoute from './Component/Utility/ProtectedRoute';
 
 
 
@@ -56,9 +57,9 @@ const App = () => {
                 <NavBar /> {/* Navbar will always be displayed */}
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/ShippingAddress" element={<ShippingAddress />} />
+                    
                     <Route path="/PaymentMethods" element={<PaymentMethods />} />
-                     <Route path="/Cartitemlist" element={<CartItem  />} />
+                    
 
                     
                     <Route path="/ProductDetails" element={<CreateProductDetails />} />
@@ -70,7 +71,12 @@ const App = () => {
                     <Route path="/EditUser/:id" element={<EditUser />} />
                     <Route path="/DetailUser/:id" element={<DetailUser />} />
                     <Route path="/category" element={<Category />} />
-                   
+                    {/* Protected route with nested routes */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/Cartitemlist" element={<CartItem />} />
+                        <Route path="/ShippingAddress" element={<ShippingAddress />} />
+                       
+                    </Route>
                 </Routes>
                 <Footer /> {/* Footer will always be displayed */}
             </div>

@@ -13,6 +13,9 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate(); // Initialize useNavigate
     const { login } = useAuth(); // Import the login function from context
+    const { isLoggedIn } = useAuth();
+
+  
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +55,7 @@ const Login = () => {
                 const jwtToken = Cookies.get('jwtToken');              
 
                 if (jwtToken) {
-                   
+                    login(); 
                     toast.success('Login successful!', {
                         position: 'top-right',
                         autoClose: 2000,

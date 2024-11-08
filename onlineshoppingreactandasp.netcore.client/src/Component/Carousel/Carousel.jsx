@@ -14,7 +14,7 @@ const Carousel = ({ slids }) => {
     return (
         <div className="flex flex-row pb-10 w-full mt-4 px-8 ">
             {/* Carousel Section */}
-            <div className="w-3/4 ml-2 mr-2">
+            <div className="w-full ml-2 mr-2">
                 <div className="relative">
                     <Swiper
                         modules={[Navigation, Pagination, Autoplay, EffectFade]} // Include necessary modules
@@ -83,11 +83,11 @@ const Carousel = ({ slids }) => {
             </div>
 
             {/* Optional Side Section for other purpose  */}
-            <div className="w-1/4 shadow p-4">
-                {/* Add content for the right side here */}
-                <h2 className="text-lg font-bold">Optional Side Content</h2>
-                <p>Your additional content goes here.</p>
-            </div>
+            {/*<div className="w-1/4 shadow p-4">*/}
+            {/*    */}{/* Add content for the right side here */}
+            {/*    <h2 className="text-lg font-bold">Optional Side Content</h2>*/}
+            {/*    <p>Your additional content goes here.</p>*/}
+            {/*</div>*/}
         </div>
     );
 };

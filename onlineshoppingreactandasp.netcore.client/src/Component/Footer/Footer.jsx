@@ -13,7 +13,7 @@ const Footer = () => {
               
             {/*</div>*/}
                 <div className="bg-sky-600  mb-0 pb-0 py-5  ">
-                    <p className="text-sm pb-5">&copy; {new Date().getFullYear()} E-Commerce App. All rights reserved.</p>
+                    <p className="text-sm pb-5">&copy; {new Date().getFullYear()} E-Shop. All rights reserved.</p>
                 </div></div>
            
         </footer>
