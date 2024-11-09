@@ -59,8 +59,8 @@ const App = () => {
                     <Route path="/" element={<HomePage />} />
                     
                     <Route path="/PaymentMethods" element={<PaymentMethods />} />
-                    
 
+                    
                     
                     <Route path="/ProductDetails" element={<CreateProductDetails />} />
                     <Route path="/createproduct" element={<CreateProduct />} />
@@ -83,4 +83,4 @@ const App = () => {
         </Router>
     );
 }
-export default App;
+export default App; 
